@@ -2,13 +2,18 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+# Danh sách username được phép active từ xa, boss man tự thêm tên vào đây
+AUTHORIZED_USERS = ["hoangnd675", "boss_man"]
+
 @app.route('/', defaults={'path': ''}, methods=['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def locket_bypass_handler(path):
+def locket_remote_bypass(path):
+    username = request.args.get('username') or (request.json.get('username') if request.is_json else "hoangnd675")
+    
     response_data = {
         "status": "success",
         "code": 200,
-        "message": "Axiom Vercel Serverless Bypass Active",
+        "message": f"Axiom Remote Bypass Active for {username}",
         "data": {
             "is_pro": True,
             "tier": "gold",
