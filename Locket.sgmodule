@@ -1,10 +1,1 @@
-#!name=Locket • Unlocker • v1.0
-#!desc=Module mở khóa gói cước Gold
-#!author=Custom
-
-[Script]
-# Bắt phản hồi từ các máy chủ quản lý gói cước RevenueCat để kích hoạt trạng thái Gold
-locket_gold_unlock = type=http-response, pattern=^https://(?:api\.revenuecat\.com|api\.rc-backup\.com|api-production\.8-lives-cat\.io)/(?:v1|v2)/(?:receipts|subscribers)(?:[/?]|$), script-path=https://raw.githubusercontent.com/hoangnd675/Locket-gold/main/locket.js, requires-body=true, max-size=1048576, timeout=10
-
-[MITM]
-hostname = %APPEND% api.revenuecat.com, api.rc-backup.com, api-production.8-lives-cat.io
+[General]\n# Axiom Custom Module for Shadowrocket / Surge\n
