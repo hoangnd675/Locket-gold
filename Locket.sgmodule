@@ -1,2 +1,2 @@
-[General]
-# Axiom Custom Module for Shadowrocket / Surge
+#!name=Locket Companion (safe mode)
+#!desc=Legacy response rewriting is disabled. This module intentionally contains no Locket traffic interception or entitlement override.
