@@ -1,1 +1,78 @@
-<html><body><h1>Axiom Server Running, Boss Man</h1></body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <meta name="description" content="Locket Companion - bảng điều khiển trạng thái và chẩn đoán dịch vụ.">
+  <title>Locket Companion</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101114;--panel:#191b21;--line:#2b2e37;--muted:#a5a8b3;--text:#f5f5f7;--gold:#f4c96b;--green:#75d6a0}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#30291b 0,transparent 36%),var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    main{width:min(920px,92%);margin:48px auto}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#f8dc91,#b77d27);display:grid;place-items:center;color:#17130b;font-size:24px;font-weight:900}
+    h1{font-size:clamp(25px,5vw,38px);margin:0;letter-spacing:-1px}.sub,.muted{color:var(--muted)}.pill{border:1px solid #6b572c;color:var(--gold);border-radius:999px;padding:6px 12px;font-size:13px}
+    .hero{margin:34px 0 18px;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#22232a,#17181d)}
+    .hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:var(--muted);max-width:650px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
+    .card h3{margin:0 0 8px;font-size:17px}.value{font-size:22px;font-weight:700;margin:12px 0 4px}.status{color:var(--green);font-size:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    button,.link{border:0;border-radius:12px;padding:11px 16px;background:var(--gold);color:#211a0d;font-weight:700;cursor:pointer;text-decoration:none;font-size:14px}
+    button.secondary,.link.secondary{background:#2b2e37;color:var(--text);border:1px solid #414550}button:disabled{opacity:.6;cursor:wait}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101115;border:1px solid var(--line);padding:14px;border-radius:12px;color:#d7d9e0;font-size:13px}
+    .notice{margin-top:16px;padding:14px 16px;border-left:3px solid var(--gold);background:#211e17;color:#e7d9b8;border-radius:8px;font-size:14px}
+    footer{margin:24px 0;color:var(--muted);font-size:13px;text-align:center}
+    @media(max-width:650px){main{margin:26px auto}.grid{grid-template-columns:1fr}.hero{padding:22px}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="brand"><div class="mark">L</div><div><h1>Locket Companion</h1><div class="sub">Bảng điều khiển & chẩn đoán</div></div></div>
+    <span class="pill">COMPANION • 1.0</span>
+  </header>
+  <section class="hero">
+    <h2>Quản lý trạng thái dịch vụ</h2>
+    <p>Theo dõi máy chủ, kiểm tra cấu hình và xem trạng thái tích hợp. Ứng dụng không can thiệp lưu lượng Locket, không giả mạo giao dịch và không tự cấp quyền Gold.</p>
+    <div class="actions"><button id="refresh">Kiểm tra ngay</button><a class="link secondary" href="https://support.locket.camera/" target="_blank" rel="noopener noreferrer">Trung tâm hỗ trợ Locket ↗</a></div>
+  </section>
+  <section class="grid">
+    <article class="card"><h3>Trạng thái máy chủ</h3><div class="value" id="server">Đang kiểm tra…</div><div class="status" id="server-detail">Đang gọi API health</div></article>
+    <article class="card"><h3>Tài khoản Locket</h3><div class="value" id="account">Chưa kết nối</div><div class="muted" id="account-detail">Không có kết nối tài khoản được hỗ trợ.</div></article>
+    <article class="card"><h3>Chẩn đoán</h3><div class="value" id="diagnostic">Đang kiểm tra…</div><div class="muted" id="diagnostic-detail">Kiểm tra các thành phần ứng dụng.</div></article>
+    <article class="card"><h3>Quản lý Gold</h3><div class="value">Qua kênh chính thức</div><div class="muted">Xem hoặc thay đổi gói đăng ký trong phần quản lý đăng ký của Apple/Google.</div><div class="actions"><a class="link secondary" href="https://support.apple.com/118428" target="_blank" rel="noopener noreferrer">Apple subscriptions ↗</a></div></article>
+  </section>
+  <div class="notice">Lưu ý: trạng thái Gold chỉ có thể xác nhận từ tài khoản và hệ thống thanh toán chính thức. Bảng điều khiển này không yêu cầu mật khẩu, mã xác minh hoặc cookie của bạn.</div>
+  <section class="card" style="margin-top:16px"><h3>Kết quả kiểm tra gần nhất</h3><pre id="log" aria-live="polite">Chưa có dữ liệu.</pre></section>
+  <footer> Locket Companion · Không liên kết hoặc được bảo trợ bởi Locket.</footer>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+async function check() {
+  const button = $("refresh"); button.disabled = true; button.textContent = "Đang kiểm tra…";
+  const results = {};
+  try {
+    const [health, account, diagnostics] = await Promise.all([
+      fetch("/api/health").then(async r => { if(!r.ok) throw new Error("Health API: HTTP " + r.status); return r.json(); }),
+      fetch("/api/account/status").then(async r => { if(!r.ok) throw new Error("Account API: HTTP " + r.status); return r.json(); }),
+      fetch("/api/diagnostics").then(async r => { if(!r.ok) throw new Error("Diagnostics API: HTTP " + r.status); return r.json(); })
+    ]);
+    results.health = health; results.account = account; results.diagnostics = diagnostics;
+    $("server").textContent = "Hoạt động"; $("server-detail").textContent = "API phản hồi thành công";
+    $("account").textContent = account.connected ? "Đã kết nối" : "Chưa kết nối";
+    $("account-detail").textContent = account.message;
+    const passed = diagnostics.checks.filter(x => x.status === "pass").length;
+    $("diagnostic").textContent = passed + "/" + diagnostics.checks.length + " kiểm tra đạt";
+    $("diagnostic-detail").textContent = "Môi trường: " + diagnostics.environment;
+  } catch (error) {
+    results.error = error.message; $("server").textContent = "Không khả dụng";
+    $("server-detail").textContent = error.message; $("diagnostic").textContent = "Có lỗi";
+  } finally {
+    $("log").textContent = JSON.stringify(results, null, 2);
+    button.disabled = false; button.textContent = "Kiểm tra lại";
+  }
+}
+$("refresh").addEventListener("click", check);
+check();
+</script>
+</body>
+</html>
